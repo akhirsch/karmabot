@@ -29,7 +29,7 @@ module.exports = (robot) ->
     robot.brain.set user, count
     msg.send "@#{user}-- [ouch! now at #{count}]"
 
-  robot.hear ///@#{botname}\s*:?\s+leaderboard (\d+)?///i, (msg) ->
+  robot.hear ///@#{botname}\s*:?\s+leaderboard\s+(\d+)?///i, (msg) ->
     users = robot.brain.data._private
     tuples = []
     for username, score of users
@@ -63,7 +63,7 @@ module.exports = (robot) ->
       str += "##{i+1}\t[#{points} " + point_label + "] #{formatted_name}" + leader + newline
     msg.send(str)
 
-  robot.hear ///@#{botname}\s*:?\s+loserboard (\d+)?///i, (msg) -> #yay copy-and-paste design pattern!
+  robot.hear ///@#{botname}\s*:?\s+loserboard\s*(\d+)?///i, (msg) -> #yay copy-and-paste design pattern!
     users = robot.brain.data._private
     tuples = []
     for username, score of users
