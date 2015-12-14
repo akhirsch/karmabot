@@ -56,11 +56,15 @@ module.exports = (robot) ->
       else +requested_count
     str = ''
     add_spaces = (m) -> m + "\u200A"
+    leader_message = if msg.match[1] == "shame"
+      " (All shame the supreme loser!)"
+    else
+      " (All hail supreme leader!)"
     for i in [0...Math.min(leaderboard_maxlen, tuples.length)]
       username = tuples[i][0]
       points = tuples[i][1]
       point_label = if points == 1 then "point" else "points"
-      leader = if i == 0 then " (All hail supreme leader!)" else ""
+      leader = if i == 0 then leader_message else ""
       newline = if i < Math.min(leaderboard_maxlen, tuples.length) - 1 then '\n' else ''
       formatted_name = username.replace(/\S/g, add_spaces).trim()
       str += "##{i+1}\t[#{points} " + point_label + "] #{formatted_name}" + leader + newline
