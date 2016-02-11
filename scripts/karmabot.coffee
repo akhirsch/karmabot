@@ -81,6 +81,7 @@ module.exports = (robot) ->
         help_msg += "\t@<name>-- -- downvote name\n"
         help_msg += "\tupbot leaderboard [n] -- list top n names; n defaults to 10\n"
         help_msg += "\tupbot shameboard [n] -- list bottom n names; n defaults to 10\n"
+        help_msg += "\tupbot karma of @<name> -- list @<name>'s karma\n"
         help_msg += "\n"
         help_msg += "My code can be found at https://github.com/tmagrino/karmabot, please feel free to submit pull requests!\n"
         help_msg += "If you have any other questions, please ask my owner, @" + formatted_owner + "!"
