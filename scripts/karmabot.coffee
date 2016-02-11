@@ -47,11 +47,6 @@ module.exports = (robot) ->
       else
         return 0
 
-    leaderboard_maxlen = 10
-
-    if res.match[0].test///\d+///
-        leaderboard_maxlen = parseInt(res.match[0].match///\d+///[0])
-    
     if msg.match[1] == "shame"
       tuples = (item for item in tuples when item[1] < 0)
       tuples.reverse()
@@ -75,8 +70,8 @@ module.exports = (robot) ->
       str += "##{i+1}\t[#{points} " + point_label + "] #{formatted_name}" + leader + newline
     msg.send(str)
 
-  robot.hear ///@#{botname}\s*(:?\s*help)?///i, (msg) -> 
-        msg.send("Usage:\n\t@<name>++ -- upvote <name>\n\t@<name>-- -- downvote name\n\tupbot leaderboard [n] -- list top n names; n defaults to 10\n\tupbot shameboard [n] -- list bottom n names; n defaults to 10")
+  robot.hear ///@#{botname}\s*:?\s*help///i, (msg) -> 
+        msg.send("Usage:\n\tupbot help -- show this message\n\t@<name>++ -- upvote <name>\n\t@<name>-- -- downvote name\n\tupbot leaderboard [n] -- list top n names; n defaults to 10\n\tupbot shameboard [n] -- list bottom n names; n defaults to 10")
 
   robot.hear ///#{botname}\s+karma\s+of\s+@([a-z0-9_\-\.]+)///i, (msg) ->
         user = msg.match[1].replace(/\-+$/g, '')
