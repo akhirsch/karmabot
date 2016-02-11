@@ -63,6 +63,7 @@ module.exports = (robot) ->
       str += "##{i+1}\t[#{points} " + point_label + "] #{formatted_name}" + leader + newline
     msg.send(str)
 
+
   robot.hear ///@#{botname}\s*:?\s+loserboard\s*(\d+)?///i, (msg) -> #yay copy-and-paste design pattern!
     users = robot.brain.data._private
     tuples = []
@@ -95,3 +96,6 @@ module.exports = (robot) ->
       formatted_name = username.replace(/\S/g, add_spaces).trim()
       str += "##{i+1}\t[#{points} " + point_label + "] #{formatted_name}" + leader + newline
     msg.send(str)
+
+  robot.hear ///@#{botname}\s*(:?\s*help)?///i, (msg) -> 
+        msg.send("Usage:\n\t@<name>++ -- upvote <name>\n\t@<name>-- -- downvote name\n\tupbot leaderboard [n] -- list top n names; n defaults to 10\n\tupbot shameboard [n] -- list bottom n names; n defaults to 10")
