@@ -1,9 +1,13 @@
 #!/bin/sh
 
+cd "${BASH_SOURCE%/*}/.."
+source bin/config.sh
+
 set -e
 
 npm install
 export PATH="node_modules/.bin:node_modules/hubot/node_modules/.bin:$PATH"
-export HUBOT_SLACK_BOTNAME="karmabot2.0"
+export HUBOT_SLACK_BOTNAME="upbot"
+export HUBOT_SLACK_OWNERNAME="tmagrino"
 
 exec node_modules/.bin/hubot --name "${HUBOT_SLACK_BOTNAME}" "$@"

@@ -7,6 +7,7 @@
 
 module.exports = (robot) ->
   botname = process.env.HUBOT_SLACK_BOTNAME
+  owner = process.env.HUBOT_SLACK_OWNERNAME
 
   robot.hear ///@([a-z0-9_\-\.]+)\+{2,}///i, (msg) ->
     user = msg.match[1].replace(/\-+$/g, '')
@@ -70,8 +71,20 @@ module.exports = (robot) ->
       str += "##{i+1}\t[#{points} " + point_label + "] #{formatted_name}" + leader + newline
     msg.send(str)
 
-  robot.hear ///@#{botname}\s*:?\s*help///i, (msg) -> 
-        msg.send("Usage:\n\tupbot help -- show this message\n\t@<name>++ -- upvote <name>\n\t@<name>-- -- downvote name\n\tupbot leaderboard [n] -- list top n names; n defaults to 10\n\tupbot shameboard [n] -- list bottom n names; n defaults to 10")
+  robot.hear ///#{botname}:?\s+help///i, (msg) -> 
+        add_spaces = (m) -> m + "\u200A"
+        formatted_owner = owner.replace(/\S/g, add_spaces).trim()
+        help_msg  = "Usage:\n"
+        help_msg += "\n"
+        help_msg += "\tupbot help -- show this message\n"
+        help_msg += "\t@<name>++ -- upvote <name>\n"
+        help_msg += "\t@<name>-- -- downvote name\n"
+        help_msg += "\tupbot leaderboard [n] -- list top n names; n defaults to 10\n"
+        help_msg += "\tupbot shameboard [n] -- list bottom n names; n defaults to 10\n"
+        help_msg += "\n"
+        help_msg += "My code can be found at https://github.com/tmagrino/karmabot, please feel free to submit pull requests!\n"
+        help_msg += "If you have any other questions, please ask my owner, @" + formatted_owner + "!"
+        msg.send(help_msg)
 
   robot.hear ///#{botname}\s+karma\s+of\s+@([a-z0-9_\-\.]+)///i, (msg) ->
         user = msg.match[1].replace(/\-+$/g, '')
