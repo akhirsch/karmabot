@@ -29,11 +29,7 @@ module.exports = (robot) ->
     robot.brain.set user, count
     msg.send "@#{user}-- [ouch! now at #{count}]"
 
-<<<<<<< HEAD
-  robot.hear ///@#{botname}\s*:?\s+leaderboard\s+(\d+)?///i, (msg) ->
-=======
   robot.hear ///#{botname}\s+(leader|shame)board\s*([0-9]+|all)?///i, (msg) ->
->>>>>>> d53dbd8bdae13e7b872b025c68f503cda7aac7ca
     users = robot.brain.data._private
     tuples = []
     for username, score of users
@@ -50,13 +46,11 @@ module.exports = (robot) ->
         return 1
       else
         return 0
-<<<<<<< HEAD
 
     leaderboard_maxlen = 10
 
     if res.match[0].test///\d+///
         leaderboard_maxlen = parseInt(res.match[0].match///\d+///[0])
-=======
     
     if msg.match[1] == "shame"
       tuples = (item for item in tuples when item[1] < 0)
