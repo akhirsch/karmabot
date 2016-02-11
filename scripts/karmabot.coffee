@@ -70,7 +70,7 @@ module.exports = (robot) ->
       str += "##{i+1}\t[#{points} " + point_label + "] #{formatted_name}" + leader + newline
     msg.send(str)
 
-  robot.hear ///@#{botname}\s*:?\s*help///i, (msg) -> 
+  robot.hear ///#{botname}\s*:?\s*help///i, (msg) -> 
         msg.send("Usage:\n\tupbot help -- show this message\n\t@<name>++ -- upvote <name>\n\t@<name>-- -- downvote name\n\tupbot leaderboard [n] -- list top n names; n defaults to 10\n\tupbot shameboard [n] -- list bottom n names; n defaults to 10")
 
   robot.hear ///#{botname}\s+karma\s+of\s+@([a-z0-9_\-\.]+)///i, (msg) ->
